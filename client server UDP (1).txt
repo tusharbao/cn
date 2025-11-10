@@ -1,0 +1,50 @@
+#server code
+import socket
+def start_server():
+  
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    server_socket.bind(('0.0.0.0', 5001))
+    print("UDP Server is up and listening on port 5001...")
+    filename, client_addr = server_socket.recvfrom(1024)
+    filename = filename.decode()
+    print(f"Receiving file: {filename} from {client_addr}")
+    with open("received_" + filename, 'wb') as f:
+        while True:
+            data, addr = server_socket.recvfrom(4096)
+            if data == b'EOF':  
+                break
+            f.write(data)
+    print(f"File '{filename}' received successfully and saved as 'received_{filename}'")
+    server_socket.sendto(b"File received successfully.", client_addr)
+    server_socket.close()
+start_server()
+
+
+#client code
+import socket
+import os
+def start_client():
+    server_ip = input("Enter server IP address: ")
+    filename = input("Enter the file name to send: ")
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    server_address = (server_ip, 5001)
+    client_socket.sendto(filename.encode(), server_address)
+    if os.path.exists(filename):
+        with open(filename, 'rb') as f:
+            while True:
+                bytes_read = f.read(4096)
+                if not bytes_read:
+                    break
+                client_socket.sendto(bytes_read, server_address)
+        client_socket.sendto(b'EOF', server_address)
+        print("File sent successfully.")
+    else:
+        print("File not found!")
+    msg, _ = client_socket.recvfrom(1024)
+    print("Server response:", msg.decode())
+    client_socket.close()
+start_client()
+
+
+#127.0.0.1
+#udp.txt

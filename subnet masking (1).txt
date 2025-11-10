@@ -1,0 +1,57 @@
+import ipaddress
+import math
+import sys
+
+def calculate_subnet_mask(ip_address, num_subnets):
+    ip_network = ipaddress.IPv4Network(ip_address, strict=False)
+    base_mask = ip_network.prefixlen
+    bits_to_borrow = math.ceil(math.log2(num_subnets))
+    new_mask = base_mask + bits_to_borrow
+
+    if new_mask > 32:
+        raise ValueError(f"Cannot create {num_subnets} subnets from {ip_network.with_prefixlen} (need prefix /{new_mask} which is > /32).")
+
+    hosts_per_subnet = (2 ** (32 - new_mask)) - 2 if new_mask < 31 else (0 if new_mask == 31 else 1)
+    dotted = ipaddress.IPv4Network(f"0.0.0.0/{new_mask}").netmask
+    return new_mask, dotted, hosts_per_subnet, ip_network
+
+def list_subnets(ip_network, new_mask):
+  
+    return list(ip_network.subnets(new_prefix=new_mask))
+
+def usable_range(subnet: ipaddress.IPv4Network):
+    if subnet.prefixlen >= 31:
+
+        return ("N/A", "N/A")
+    hosts = list(subnet.hosts())
+    return (hosts[0], hosts[-1])
+
+def main():
+    print("Subnetting Demonstration Program (improved)\n")
+    ip_address = input("Enter the IP address with CIDR (e.g., 192.168.1.0/24): ").strip()
+    try:
+        num_subnets = int(input("Enter the number of subnets required: ").strip())
+    except ValueError:
+        print("Invalid number of subnets.")
+        return
+
+    try:
+        new_mask, dotted, hosts_per_subnet, ip_network = calculate_subnet_mask(ip_address, num_subnets)
+    except Exception as e:
+        print("Error:", e)
+        return
+
+    print(f"\nOriginal network: {ip_network.with_prefixlen}")
+    print(f"New mask: /{new_mask}    ({dotted})")
+    print(f"Usable hosts per subnet (approx): {hosts_per_subnet}\n")
+
+    subnets = list_subnets(ip_network, new_mask)
+    if len(subnets) < num_subnets:
+        print(f"Warning: computed only {len(subnets)} possible subnets; requested {num_subnets}.")
+    print("Subnets:")
+    for i, s in enumerate(subnets[:num_subnets], start=1):
+        first, last = usable_range(s)
+        bcast = s.broadcast_address
+        print(f"{i:2d}. {s.with_prefixlen}  | Network: {s.network_address} | Broadcast: {bcast} | Usable: {first} - {last} | Hosts: {len(list(s.hosts()))}")
+
+main()
