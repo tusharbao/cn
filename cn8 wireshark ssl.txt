@@ -1,0 +1,109 @@
+Wireshark me SSL Packets Capture Karne ke Steps
+Step 1: Wireshark Install Kare
+
+Agar aapke system me Wireshark install nahi hai, to Wireshark website
+ se download kare aur install kare.
+
+Step 2: Wireshark Open Kare
+
+Wireshark application launch kare.
+
+Step 3: Network Interface Select Kare
+
+Capture karne ke liye network interface choose kare (Wi-Fi ya Ethernet).
+
+Start Capturing Packets button pe click kare.
+
+Step 4: SSL-Secured Website Visit Kare
+
+Apna web browser open kare.
+
+Ek SSL-secured website visit kare (jaise bank ya e-commerce site).
+
+Ensure kare ki URL https:// se start ho.
+
+Step 5: Packet Capture Stop Kare
+
+Website load hone ke baad Wireshark me wapas jaye.
+
+Stop Capturing Packets button pe click kare.
+
+Step 6: SSL/TLS Traffic Filter Kare
+
+Wireshark filter bar me type kare:
+
+ssl
+
+
+ya
+
+tls
+
+
+Ye sirf SSL/TLS packets show karega.
+
+Step 7: SSL Packets Analyze Kare
+
+Kisi packet pe click kare → Packet Details Pane me details dekhe.
+
+Client Hello aur Server Hello messages identify kare (ye SSL handshake start karte hain).
+
+Dusre relevant packets jaise encrypted data ko bhi analyze kare.
+
+Step 8: SSL Handshake Inspect Kare
+
+SSL handshake ke steps identify kare:
+
+Key exchange
+
+Cipher negotiation
+
+Session establishment
+
+Step 9: Capture Save Kare (Optional)
+
+Agar aap packet analysis future me karna chahte ho:
+
+File → Save As → Packet capture save kare.
+
+Step 10: Wireshark Exit Kare
+
+Kaam complete hone ke baad Wireshark close kare.
+
+
+
+
+
+
+
+
+Steps to Capture SSL Packets Using Wireshark 
+1. Install Wireshark: 
+o Download and install Wireshark if you haven't already. 
+2. Open Wireshark: 
+o Launch the Wireshark application. 
+3. Select Network Interface: 
+o Choose the appropriate network interface (e.g., Wi-Fi or Ethernet) to capture packets. 
+o Click the Start Capturing Packets button. 
+4. Visit SSL-Secured Website: 
+o
+ o 
+Open a web browser and navigate to an SSL-secured website (e.g., your bank or an e-commerce site).
+ Ensure the URL starts with https://. 
+5. Stop Packet Capture: 
+o After the website loads, return to Wireshark and click the Stop Capturing Packets button. 
+6. Filter SSL/TLS Traffic: 
+o In the Wireshark filter bar, enter ssl or tls to filter only the SSL/TLS packets. 
+7. Analyze SSL Packets: 
+o
+ o
+ o 
+Click on a packet to view details in the packet details pane.
+ Look for the Client Hello and Server Hello messages, which initiate the SSL handshake.
+ Analyze other relevant packets, such as those containing encrypted data. 
+8. Inspect SSL Handshake: 
+o Identify the SSL handshake process, including key exchange, cipher negotiation, and session 
+establishment. 
+9. Save Capture: 
+o Optionally, save the captured packets for further analysis by clicking on File > Save As. 
+10. Exit Wireshark:

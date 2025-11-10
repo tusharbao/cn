@@ -1,0 +1,383 @@
+import ipaddress
+import math
+
+def calculate_subnet_mask(ip_address, num_subnets):
+    # Convert IP address to an IPv4Network object
+    ip_network = ipaddress.IPv4Network(ip_address, strict=False)
+
+    # Get the base subnet mask in CIDR notation
+    base_mask = ip_network.prefixlen
+
+    # Calculate the new subnet mask by finding how many additional bits are needed
+    # log2(num_subnets) gives the number of bits to borrow for subnetting
+    bits_to_borrow = math.ceil(math.log2(num_subnets))
+    new_mask = base_mask + bits_to_borrow
+
+    # Calculate the new subnet mask in dotted decimal notation
+    subnet_mask = ipaddress.IPv4Network(f'0.0.0.0/{new_mask}').netmask
+
+    # Calculate the number of hosts per subnet
+    num_hosts_per_subnet = 2 ** (32 - new_mask) - 2  # Minus 2 for network and broadcast address
+
+    return new_mask, subnet_mask, num_hosts_per_subnet
+
+
+def main():
+    print("Subnetting Demonstration Program")
+
+    # Input IP address and the number of subnets
+    ip_address = input("Enter the IP address with CIDR (e.g., 192.168.1.0/24): ")
+    num_subnets = int(input("Enter the number of subnets required: "))
+
+    # Calculate subnet mask and related information
+    new_mask, subnet_mask, num_hosts_per_subnet = calculate_subnet_mask(ip_address, num_subnets)
+
+    # Display the results
+    print(f"\nCalculated Subnet Mask Information:")
+    print(f"Original IP Address and CIDR: {ip_address}")
+    print(f"New Subnet Mask (CIDR Notation): /{new_mask}")
+    print(f"New Subnet Mask (Dotted Decimal Notation): {subnet_mask}")
+    print(f"Number of Hosts per Subnet: {num_hosts_per_subnet}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+input:
+Subnetting Demonstration Program
+Enter the IP address with CIDR (e.g., 192.168.1.0/24): 192.168.1.0/24
+Enter the number of subnets required: 4
+
+output:
+Calculated Subnet Mask Information:
+Original IP Address and CIDR: 192.168.1.0/24
+New Subnet Mask (CIDR Notation): /26
+New Subnet Mask (Dotted Decimal Notation): 255.255.255.192
+Number of Hosts per Subnet: 62
+
+
+
+
+
+Code Explanation Line by Line
+import ipaddress
+import math
+
+
+➡️ Ye dono Python modules import kar rahe hain.
+
+ipaddress module IP addresses aur networks ko handle karne ke liye hota hai.
+
+math module mathematical calculations (jaise log2, ceil etc.) ke liye use hota hai.
+
+def calculate_subnet_mask(ip_address, num_subnets):
+
+
+➡️ Ye ek function define kar raha hai jiska naam hai calculate_subnet_mask.
+Ye function do input parameters lega:
+
+ip_address – jaise "192.168.1.0/24"
+
+num_subnets – jitne subnets chahiye (e.g., 4)
+
+    ip_network = ipaddress.IPv4Network(ip_address, strict=False)
+
+
+➡️ Ye line input IP address ko ek IPv4 network object me convert karti hai.
+strict=False ka matlab hai ki agar IP exact network address na bhi ho to bhi ye accept karega.
+
+Example:
+192.168.1.1/24 likhne par bhi wo network 192.168.1.0/24 samjhega.
+
+    base_mask = ip_network.prefixlen
+
+
+➡️ Ye line original CIDR prefix nikalti hai, jaise /24 me 24 part.
+Yani original subnet mask me kitne bits network ke liye use ho rahe hain.
+
+    bits_to_borrow = math.ceil(math.log2(num_subnets))
+
+
+➡️ Ye line calculate karti hai ki kitne extra bits chahiye subnet banane ke liye.
+
+log2(num_subnets) se pata chalta hai ki itne bits se itne subnets ban sakte hain.
+
+ceil() use karte hain taaki number pura (integer) mile.
+
+Example:
+Agar num_subnets = 4
+→ log2(4) = 2
+→ matlab 2 bits borrow karne padenge.
+
+    new_mask = base_mask + bits_to_borrow
+
+
+➡️ Ab hum new subnet mask calculate kar rahe hain —
+original CIDR me borrowed bits add karke.
+Example: /24 + 2 bits = /26.
+
+    subnet_mask = ipaddress.IPv4Network(f'0.0.0.0/{new_mask}').netmask
+
+
+➡️ Ye line new CIDR value se dotted decimal subnet mask nikalti hai.
+Jaise /26 → 255.255.255.192
+
+    num_hosts_per_subnet = 2 ** (32 - new_mask) - 2
+
+
+➡️ Ye line har subnet me available hosts ki total count nikalti hai.
+Formula:
+👉 2^(host bits) - 2
+(2 minus isliye — ek network address aur ek broadcast address reserved hote hain)
+
+Example:
+/26 → 32 - 26 = 6 host bits
+→ 2⁶ - 2 = 62 hosts per subnet.
+
+    return new_mask, subnet_mask, num_hosts_per_subnet
+
+
+➡️ Function ab ye teen values return karta hai:
+
+New CIDR mask
+
+Dotted decimal mask
+
+Hosts per subnet
+
+def main():
+
+
+➡️ Ye main function hai — program yahin se run hota hai.
+
+    print("Subnetting Demonstration Program")
+
+
+➡️ Ye ek introductory line print karta hai — program ka title.
+
+    ip_address = input("Enter the IP address with CIDR (e.g., 192.168.1.0/24): ")
+
+
+➡️ User se IP address input leta hai jisme CIDR included ho (jaise /24).
+
+    num_subnets = int(input("Enter the number of subnets required: "))
+
+
+➡️ User se number of subnets poochta hai aur usse integer me convert karta hai.
+
+    new_mask, subnet_mask, num_hosts_per_subnet = calculate_subnet_mask(ip_address, num_subnets)
+
+
+➡️ Ye line hamare pehle banaye function calculate_subnet_mask() ko call karti hai
+aur uske return values ko teen variables me store karti hai.
+
+    print(f"\nCalculated Subnet Mask Information:")
+
+
+➡️ Ek blank line ke saath heading print karta hai jo result show karegi.
+
+    print(f"Original IP Address and CIDR: {ip_address}")
+
+
+➡️ Original IP address aur CIDR display karta hai.
+
+    print(f"New Subnet Mask (CIDR Notation): /{new_mask}")
+
+
+➡️ Naya subnet mask CIDR format me print karta hai (e.g., /26).
+
+    print(f"New Subnet Mask (Dotted Decimal Notation): {subnet_mask}")
+
+
+➡️ Naya subnet mask dotted-decimal form me print karta hai (e.g., 255.255.255.192).
+
+    print(f"Number of Hosts per Subnet: {num_hosts_per_subnet}")
+
+
+➡️ Har subnet me available hosts ki total count print karta hai.
+
+if __name__ == "__main__":
+    main()
+
+
+➡️ Ye Python ka entry point hota hai.
+Iska matlab hai:
+👉 Agar ye file directly run ho rahi hai (import nahi ki gayi),
+to main() function execute ho.
+
+💡 Summary in Short:
+
+Ye program ek IP address aur required subnets leta hai,
+fir calculate karta hai:
+
+New subnet mask (CIDR aur dotted form dono me)
+
+Har subnet me kitne hosts fit ho sakte hain
+
+
+
+
+
+questins:
+1. What is subnetting?
+Subnetting ka matlab hota hai ek badi network ko chhoti-chhoti sub-networks me divide karna.
+
+→ Subnetting means dividing a large network into smaller subnetworks.
+
+2. Why do we need subnetting?
+Subnetting se IP addresses ka sahi use hota hai, network traffic kam hota hai, aur security aur performance improve hoti hai.
+
+→ Subnetting helps in efficient IP usage, reduces network traffic, and improves security and performance.
+
+3. What is a subnet mask?
+Subnet mask batata hai ki IP address ka kaunsa part network ka hai aur kaunsa host ka.
+
+→ A subnet mask identifies which part of an IP address is for the network and which part is for the host.
+
+4. How is subnet mask calculated?
+Subnet mask calculate karne ke liye host bits me se kuch bits borrow karte hain, based on required subnets.
+
+→ The subnet mask is calculated by borrowing bits from the host portion depending on the number of subnets needed.
+
+5. How many hosts are available per subnet for a given mask?
+Hosts = 2ⁿ − 2, jaha n = host bits ki sankhya hoti hai.
+
+→ Hosts = 2ⁿ − 2, where n is the number of host bits.
+
+6. What is CIDR notation?
+CIDR notation me subnet mask ko / ke sath likhte hain, jaise /24.
+
+→ CIDR (Classless Inter-Domain Routing) represents subnet mask with a slash, e.g., /24.
+
+7. Give an example of a subnet mask for Class C network.
+Class C ke liye subnet mask hota hai 255.255.255.0 (ya /24).
+
+→ Example: For Class C network, subnet mask is 255.255.255.0 (or /24).
+
+8. What is the range of private IP addresses?
+
+Class A: 10.0.0.0 – 10.255.255.255
+
+Class B: 172.16.0.0 – 172.31.255.255
+
+Class C: 192.168.0.0 – 192.168.255.255
+
+→
+
+Class A: 10.0.0.0 – 10.255.255.255
+
+Class B: 172.16.0.0 – 172.31.255.255
+
+Class C: 192.168.0.0 – 192.168.255.255
+
+9. What is the difference between network ID and host ID?
+Network ID poore network ko represent karta hai, jabki Host ID us network ke andar ek specific device ko represent karti hai.
+
+→ Network ID identifies the whole network, while Host ID identifies a specific device inside that network.
+
+10. What command or program do you use to find the subnet mask?
+Windows me ipconfig use karte hain, aur Linux/Mac me ifconfig ya ip addr show.
+
+→ In Windows: ipconfig | In Linux/Mac: ifconfig or ip addr show
+
+1. What is subnetting?
+
+Subnetting ka matlab hai ek IP network ko chhote parts (subnets) me todna, taaki address efficiently use ho aur management easy ho.
+
+→ Subnetting means dividing a single IP network into smaller subnetworks for better efficiency and management.
+
+2. Why do we need subnetting?
+
+Subnetting se IP addresses ka best use hota hai, network traffic kam hota hai, aur performance aur security improve hoti hai.
+
+→ Subnetting helps in efficient IP usage, reduces traffic, and increases performance and security.
+
+3. What is a subnet mask?
+
+Subnet mask ek value hoti hai jo batati hai ki IP address ka kaunsa part network ka hai aur kaunsa host ka.
+
+→ A subnet mask defines which portion of an IP address represents the network and which part represents the host.
+
+4. How is subnet mask calculated (as per code)?
+
+Code me subnet mask calculate hota hai:
+
+Pehle base mask liya jata hai (ip_network.prefixlen)
+
+Phir math.log2(num_subnets) se nikalte hain kitne bits borrow karne hain
+
+Fir new mask = base mask + borrowed bits
+
+Aur ipaddress.IPv4Network se dotted-decimal mask milta hai
+
+→ In the code, subnet mask is calculated by borrowing bits from the host part based on the required number of subnets using log2(num_subnets).
+
+5. How many hosts are available per subnet for a given mask?
+
+Code me hosts calculate hote hain:
+2 ** (32 - new_mask) - 2
+(-2 network aur broadcast ke liye)
+
+→ The number of hosts per subnet = 2^(32 - new_mask) - 2 (subtracting network and broadcast addresses).
+
+6. What is CIDR notation?
+
+CIDR notation me subnet mask / ke sath likhte hain, jaise /26.
+Code me new_mask ye value represent karta hai.
+
+→ CIDR (Classless Inter-Domain Routing) represents subnet mask with a slash and number of bits, e.g., /26.
+
+7. Give an example of a subnet mask for Class C network.
+
+Class C ke liye subnet mask hota hai /24 ya 255.255.255.0.
+Code me agar hum subnet increase karein to jaise /26 ya 255.255.255.192 ban jata hai.
+
+→ For Class C, subnet mask is usually /24 (255.255.255.0) and may become /26 (255.255.255.192) when subnetted.
+
+8. What is the range of private IP addresses?
+
+Class A: 10.0.0.0 – 10.255.255.255
+
+Class B: 172.16.0.0 – 172.31.255.255
+
+Class C: 192.168.0.0 – 192.168.255.255
+
+→
+
+Class A: 10.0.0.0 – 10.255.255.255
+
+Class B: 172.16.0.0 – 172.31.255.255
+
+Class C: 192.168.0.0 – 192.168.255.255
+
+9. What is the difference between network ID and host ID?
+
+Network ID poora network batata hai, aur host ID us network ke andar ek specific device ko identify karti hai.
+Code me network part CIDR mask se decide hota hai.
+
+→ Network ID identifies the overall network, while Host ID identifies a device within that network. The mask (CIDR) determines their split.
+
+10. What command or program do you use to find the subnet mask?
+
+Windows me: ipconfig
+
+Linux/Mac me: ifconfig ya ip addr show
+Python me ye program bhi subnet mask calculate kar sakta hai.
+
+→
+In Windows: ipconfig
+In Linux/Mac: ifconfig or ip addr show
+
+'''

@@ -1,0 +1,181 @@
+Step 1: Wired LAN (LAN1) Setup Kare
+
+Cisco Packet Tracer open kare.
+
+Devices drag kare:
+
+1 Layer 2 Switch (2960)
+
+2 PCs
+
+Cables connect kare (Copper Straight-Through):
+
+PC1 FastEthernet0 → Switch FastEthernet0/1
+
+PC2 FastEthernet0 → Switch FastEthernet0/2
+
+Step 2: Wireless LAN (LAN2) Setup Kare
+
+Wireless Router drag kare (jaise Linksys WRT300N)
+
+Laptops drag kare: 2 Laptops
+
+Wireless Router Configure kare:
+
+GUI ya Config tab → SSID set kare (e.g., WirelessLAN)
+
+DHCP enable kare → Wireless clients ko automatic IP assign hoga
+
+Wireless Security set kare (e.g., WPA2 Personal) aur Password define kare
+
+Laptops Configure kare:
+
+Laptop1 → Desktop → PC Wireless → Connect → WirelessLAN → Password enter kare
+
+Laptop2 ke liye bhi same process repeat kare
+
+Step 3: Wired aur Wireless LAN Ko Interconnect Kare
+
+Router drag kare (jaise 1841 ya 2911)
+
+Wired LAN → Router connect kare:
+
+Switch FastEthernet0/24 → Router FastEthernet0/0 (Copper Straight-Through)
+
+Wireless Router → Router connect kare:
+
+Wireless Router Internet port → Router FastEthernet0/1 (Copper Straight-Through)
+
+Step 4: IP Addresses Configure Kare
+
+Router Interfaces configure kare:
+
+FastEthernet0/0 (Wired LAN): 192.168.1.1/24
+
+FastEthernet0/1 (Wireless LAN): 192.168.2.1/24
+
+Static IP assign kare Wired PCs ko:
+
+PC1: 192.168.1.2, Subnet Mask: 255.255.255.0, Default Gateway: 192.168.1.1
+
+PC2: 192.168.1.3, Subnet Mask: 255.255.255.0, Default Gateway: 192.168.1.1
+
+Wireless Laptops → DHCP se automatic IP assign hoga (192.168.2.x) aur Default Gateway 192.168.2.1
+
+Step 5: Router Me Routing Configure Kare
+
+Router CLI open kare → Enable mode me jaye:
+
+enable
+configure terminal
+
+
+Interfaces configure kare:
+
+interface FastEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+exit
+interface FastEthernet0/1
+ ip address 192.168.2.1 255.255.255.0
+ no shutdown
+exit
+end
+
+
+Ye ensure karta hai ki Wired LAN aur Wireless LAN ke beech communication ho.
+
+Step 6: Connectivity Test Using PING
+
+PC1 (Wired LAN) → Command Prompt → ping Laptop1 IP:
+
+ping 192.168.2.x
+
+
+Laptop1 (Wireless LAN) → Command Prompt → ping PC1 IP:
+
+ping 192.168.1.2
+
+
+✅ Dono directions me successful reply aana chahiye → Communication sahi hai
+
+Step 7: Packet Transfer Demonstration in Simulation Mode
+
+Packet Tracer me Simulation Mode activate kare → Stopwatch icon
+
+PC1 → Laptop1 ko ping bheje
+
+Simulation window me packets ka flow observe kare:
+
+Packets Wired LAN → Router → Wireless LAN → Laptop1 tak travel karte hain
+
+Packets pe click kare → Detailed journey dekhe, including Source, Destination aur Routing path
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+questions
+
+
+Q1. What is a WAN?
+
+Hindi-English: Wide Area Network — large geographical area cover karta hai.
+English: WAN connects multiple LANs over large areas.
+
+Q2. How is WAN different from LAN?
+
+Hindi-English: WAN bada area cover karta hai aur routers use karta hai.
+English: WAN covers larger areas and uses routers.
+
+Q3. What devices are used to connect two LANs?
+
+Hindi-English: Routers.
+English: Routers.
+
+Q4. What is the purpose of a router in WAN?
+
+Hindi-English: Data packets ko different networks ke beech route karta hai.
+English: Routes data between different networks.
+
+Q5. What is SSID?
+
+Hindi-English: Wireless network ka name hota hai.
+English: SSID is the name of a wireless network.
+
+Q6. How do you configure a wireless LAN in Packet Tracer?
+
+Hindi-English: Wireless router add karo → SSID set karo → devices connect karo.
+English: Add wireless router, set SSID, and connect devices.
+
+Q7. What protocol is used for wireless communication?
+
+Hindi-English: IEEE 802.11 (Wi-Fi).
+English: IEEE 802.11 protocol.
+
+Q8. How can you check connectivity between two LANs?
+
+Hindi-English: PING command se.
+English: Using the PING command.
+
+Q9. What is a packet in networking?
+
+Hindi-English: Data ka small unit jo network me transfer hota hai.
+English: A packet is a small unit of data sent over the network.
+
+Q10. What does the Packet Tracer simulation show during transfer?
+
+Hindi-English: Data packets ka movement aur path between devices.
+English: It shows packet movement and data flow path.

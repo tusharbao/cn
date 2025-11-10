@@ -1,0 +1,302 @@
+1. Demonstrate different types of topologies and transmission media
+Q1. What is network topology?
+Hindi-English: Topology ka matlab hota hai network me devices ka connection pattern.
+English: Network topology is the physical or logical layout of connected devices.
+________________________________________
+Q2. Name different types of network topologies.
+Hindi-English: Bus, Star, Ring, Mesh, Tree, Hybrid.
+English: Bus, Star, Ring, Mesh, Tree, and Hybrid topologies.
+________________________________________
+Q3. Difference between Bus, Star, and Ring topology?
+Hindi-English:
+•	Bus: Single cable sabko connect karti hai.
+•	Star: Sab devices ek central switch/hub se connect hote hain.
+•	Ring: Devices ek loop (ring) me connected hote hain.
+English:
+Bus uses a single backbone cable, Star connects all devices to a central device, Ring connects devices in a closed loop.
+________________________________________
+Q4. What are transmission media?
+Hindi-English: Data transfer ke liye use hone wale path ko transmission media kehte hain.
+English: Transmission media are the physical paths for data transmission.
+________________________________________
+Q5. Difference between guided and unguided media?
+Hindi-English:
+•	Guided: Wired media (cables) jaise Twisted Pair, Coaxial, Fiber.
+•	Unguided: Wireless media jaise Radio, Microwave, Infrared.
+English:
+Guided media use cables; unguided media use air for wireless communication.
+________________________________________
+Q6. Which transmission medium is used in wired LAN?
+Hindi-English: Twisted Pair Cable (Cat5e / Cat6).
+English: Twisted pair cables are used in wired LANs.
+________________________________________
+Q7. What tool is used to simulate networks?
+Hindi-English: Cisco Packet Tracer.
+English: Cisco Packet Tracer.
+________________________________________
+Q8. What are the uses of Packet Tracer?
+Hindi-English: Network design, simulation, configuration aur testing ke liye.
+English: Used for designing, simulating, configuring, and testing networks.
+________________________________________
+Q9. How can you check connectivity between nodes?
+Hindi-English: PING command use karke.
+English: Using the PING command.
+________________________________________
+Q10. What happens when you change the topology type?
+Hindi-English: Data flow path aur connectivity change ho jaati hai.
+English: Changing topology changes data flow and network connections.
+________________________________________
+2. Setup a wired LAN using Layer 2 switch
+Q1. What is a LAN?
+Hindi-English: Local Area Network — ek chhoti area me connected computers ka group.
+English: LAN connects computers within a small area like a building.
+________________________________________
+Q2. What is the function of a Layer 2 switch?
+Hindi-English: MAC addresses ke base par frames forward karta hai.
+English: A Layer 2 switch forwards frames based on MAC addresses.
+________________________________________
+Q3. What type of cable is used for LAN connection?
+Hindi-English: Ethernet cable (Cat5e / Cat6).
+English: Ethernet cables (Cat5e/Cat6).
+________________________________________
+Q4. What tool is used for testing cable connectivity?
+Hindi-English: Cable tester ya multimeter.
+English: Cable tester or multimeter.
+________________________________________
+Q5. What is IP address configuration?
+Hindi-English: Device ko ek unique IP assign karna.
+English: Assigning a unique IP address to a device.
+________________________________________
+Q6. How do you assign an IP address to a PC?
+Hindi-English: Packet Tracer me → PC → Desktop → IP Configuration.
+English: In Packet Tracer, go to PC → Desktop → IP Configuration.
+________________________________________
+Q7. What is the purpose of the PING command?
+Hindi-English: Network connectivity check karne ke liye.
+English: To test connectivity between devices.
+________________________________________
+Q8. What does a successful PING indicate?
+Hindi-English: Network properly connected hai.
+English: It indicates proper network connectivity.
+________________________________________
+Q9. What is Wireshark used for?
+Hindi-English: Network packets ko capture aur analyze karne ke liye.
+English: Used to capture and analyze network packets.
+________________________________________
+Q10. What is shown in Wireshark when you capture PING packets?
+Hindi-English: ICMP Echo Request aur Echo Reply packets.
+English: ICMP Echo Request and Echo Reply packets.
+________________________________________
+3. Setup a WAN (wired + wireless LAN) using Packet Tracer
+Q1. What is a WAN?
+Hindi-English: Wide Area Network — large geographical area cover karta hai.
+English: WAN connects multiple LANs over large areas.
+________________________________________
+Q2. How is WAN different from LAN?
+Hindi-English: WAN bada area cover karta hai aur routers use karta hai.
+English: WAN covers larger areas and uses routers.
+________________________________________
+Q3. What devices are used to connect two LANs?
+Hindi-English: Routers.
+English: Routers.
+________________________________________
+Q4. What is the purpose of a router in WAN?
+Hindi-English: Data packets ko different networks ke beech route karta hai.
+English: Routes data between different networks.
+________________________________________
+Q5. What is SSID?
+Hindi-English: Wireless network ka name hota hai.
+English: SSID is the name of a wireless network.
+________________________________________
+Q6. How do you configure a wireless LAN in Packet Tracer?
+Hindi-English: Wireless router add karo → SSID set karo → devices connect karo.
+English: Add wireless router, set SSID, and connect devices.
+________________________________________
+Q7. What protocol is used for wireless communication?
+Hindi-English: IEEE 802.11 (Wi-Fi).
+English: IEEE 802.11 protocol.
+________________________________________
+Q8. How can you check connectivity between two LANs?
+Hindi-English: PING command se.
+English: Using the PING command.
+________________________________________
+Q9. What is a packet in networking?
+Hindi-English: Data ka small unit jo network me transfer hota hai.
+English: A packet is a small unit of data sent over the network.
+________________________________________
+Q10. What does the Packet Tracer simulation show during transfer?
+Hindi-English: Data packets ka movement aur path between devices.
+English: It shows packet movement and data flow path.
+
+6. UDP Socket Program for File Transfer
+Q1. What is UDP?
+Hindi-English: UDP (User Datagram Protocol) ek fast, connectionless protocol hai.
+English: UDP is a fast, connectionless protocol.
+________________________________________
+Q2. How is UDP different from TCP?
+Hindi-English: UDP me connection nahi banta aur reliability kam hoti hai.
+English: UDP doesn’t establish a connection and is less reliable than TCP.
+________________________________________
+Q3. What is meant by connectionless service?
+Hindi-English: Data bina connection ke bheja jata hai.
+English: Data is sent without establishing a connection.
+________________________________________
+Q4. Is UDP reliable? Why or why not?
+Hindi-English: Nahi, kyunki error checking aur acknowledgment nahi hota.
+English: No, because it lacks acknowledgment and error recovery.
+________________________________________
+Q5. Real-life examples of UDP?
+Hindi-English: Video streaming, VoIP, online gaming.
+English: Used in video streaming, VoIP, gaming.
+________________________________________
+Q6. What functions are used for UDP communication?
+Hindi-English: socket(), sendto(), recvfrom(), bind().
+English: socket(), sendto(), recvfrom(), bind().
+________________________________________
+Q7. How do you send and receive files using UDP?
+Hindi-English: Client file ko chunks me send karta hai aur server recvfrom() se receive karta hai.
+English: Client sends file chunks; server receives with recvfrom().
+________________________________________
+Q8. What types of files can be transferred?
+Hindi-English: Text, image, or any binary file.
+English: Text, image, or any binary files.
+________________________________________
+Q9. What happens if a packet is lost in UDP?
+Hindi-English: Packet resend nahi hota; data loss hota hai.
+English: Lost packets are not retransmitted, causing data loss.
+________________________________________
+Q10. Why is UDP preferred for audio/video transfer?
+Hindi-English: Kyunki fast hai aur thoda packet loss acceptable hai.
+English: It’s faster, and small packet loss doesn’t affect real-time media.
+
+________________________________________
+7. Study and Analyze HTTP, HTTPS and FTP Protocol using Packet Tracer
+Q1. What is HTTP?
+Hindi-English: HTTP (HyperText Transfer Protocol) ek web communication protocol hai jo web pages ko browser me load karta hai.
+English: HTTP is a protocol used for transferring web pages over the internet.
+________________________________________
+Q2. What is HTTPS?
+Hindi-English: HTTPS (HTTP Secure) HTTP ka secure version hai jo encryption (SSL/TLS) use karta hai.
+English: HTTPS is a secure version of HTTP that uses SSL/TLS encryption.
+________________________________________
+Q3. What is FTP used for?
+Hindi-English: FTP (File Transfer Protocol) files ko server aur client ke beech transfer karne ke liye use hota hai.
+English: FTP is used to transfer files between client and server.
+________________________________________
+Q4. What port numbers do HTTP, HTTPS, and FTP use?
+Hindi-English:
+•	HTTP → Port 80
+•	HTTPS → Port 443
+•	FTP → Ports 20 (Data) & 21 (Control)
+English:
+HTTP: 80, HTTPS: 443, FTP: 20 and 21
+________________________________________
+Q5. What is the main difference between HTTP and HTTPS?
+Hindi-English: HTTPS me data encrypted hota hai, jabki HTTP me nahi.
+English: HTTPS encrypts data, HTTP does not.
+________________________________________
+Q6. What protocol provides security to HTTPS?
+Hindi-English: SSL/TLS (Secure Socket Layer / Transport Layer Security).
+English: SSL/TLS provides security to HTTPS.
+________________________________________
+Q7. What is SSL/TLS?
+Hindi-English: SSL/TLS encryption aur authentication provide karta hai taaki data secure rahe.
+English: SSL/TLS provides encryption and authentication for secure communication.
+________________________________________
+Q8. How do you simulate these protocols in Packet Tracer?
+Hindi-English: HTTP, HTTPS aur FTP servers add karke aur unke services enable karke simulation kar sakte hain.
+English: Add and configure HTTP, HTTPS, and FTP servers in Packet Tracer to simulate protocols.
+________________________________________
+Q9. How can you test file transfer using FTP?
+Hindi-English: Client PC se FTP server pe login karke upload/download karte hain.
+English: Login to the FTP server from the client and perform upload/download.
+________________________________________
+Q10. What information can be seen in the packet details?
+Hindi-English: Source/destination IP, protocol type, port numbers, aur data info.
+English: Shows source/destination IPs, ports, protocol, and packet data.
+________________________________________
+8. To study the SSL protocol using Wireshark
+Q1. What is SSL?
+Hindi-English: SSL (Secure Sockets Layer) ek security protocol hai jo data ko encrypt karta hai.
+English: SSL is a security protocol that encrypts data during transfer.
+________________________________________
+Q2. What is the purpose of SSL in communication?
+Hindi-English: Data ko safe aur private banana communication ke dauran.
+English: To keep data private and secure during transmission.
+________________________________________
+Q3. What is TLS?
+Hindi-English: TLS (Transport Layer Security) SSL ka updated aur secure version hai.
+English: TLS is the newer and more secure version of SSL.
+________________________________________
+Q4. How do you recognize SSL packets in Wireshark?
+Hindi-English: “Client Hello” aur “Server Hello” packets capture me dikhte hain.
+English: SSL/TLS packets appear as “Client Hello” and “Server Hello” in Wireshark.
+________________________________________
+Q5. What port is used for HTTPS?
+Hindi-English: Port 443.
+English: Port 443.
+________________________________________
+Q6. What happens during the SSL handshake?
+Hindi-English: Client aur server keys exchange karte hain aur ek secure connection banate hain.
+English: Client and server exchange keys and establish a secure session.
+________________________________________
+Q7. What is encryption?
+Hindi-English: Plain data ko unreadable format me convert karna.
+English: Converting plain text into unreadable coded data.
+________________________________________
+Q8. Why is SSL important for online banking or e-commerce?
+Hindi-English: SSL sensitive data jaise passwords aur card info ko protect karta hai.
+English: SSL protects sensitive data like passwords and payment details.
+________________________________________
+Q9. What are digital certificates?
+Hindi-English: Certificates jo server ki authenticity verify karte hain.
+English: Digital certificates verify the identity of a server or website.
+________________________________________
+Q10. How do you identify a secure website?
+Hindi-English: Browser address bar me “https://” aur padlock symbol dikhai deta hai.
+English: A secure website shows “https://” and a padlock icon in the browser.
+________________________________________
+11. Installing and Configuring DHCP Server
+Q1. What is DHCP?
+Hindi-English: DHCP (Dynamic Host Configuration Protocol) IP addresses automatically assign karta hai.
+English: DHCP automatically assigns IP addresses to devices.
+________________________________________
+Q2. What is the function of a DHCP server?
+Hindi-English: Clients ko automatic IP, subnet mask, gateway deta hai.
+English: Assigns IP, subnet mask, and gateway to clients.
+________________________________________
+Q3. What are the advantages of DHCP?
+Hindi-English: Time saving, less manual work, aur IP conflicts kam.
+English: Saves time, reduces errors, and avoids IP conflicts.
+________________________________________
+Q4. Difference between static and dynamic IP assignment?
+Hindi-English:
+•	Static: Manually set hoti hai
+•	Dynamic: DHCP se auto milti hai
+English:
+Static is manual; dynamic is automatic via DHCP.
+________________________________________
+Q5. What is a DHCP lease?
+Hindi-English: Temporary period jisme client ko IP assign hota hai.
+English: The time duration for which an IP is assigned to a client.
+________________________________________
+Q6. Steps of DHCP process (DORA)?
+Hindi-English: Discover → Offer → Request → Acknowledge.
+English: Discover, Offer, Request, Acknowledge.
+________________________________________
+Q7. How do you configure a DHCP server in Packet Tracer?
+Hindi-English: Server → Services → DHCP → Pool set karo (Network, Mask, Gateway, DNS).
+English: In Packet Tracer, configure DHCP service by setting pool details.
+________________________________________
+Q8. How do clients obtain IP addresses automatically?
+Hindi-English: DHCP enable karke “Obtain IP Automatically” option select karte hain.
+English: Clients get IPs automatically when DHCP is enabled.
+________________________________________
+Q9. What command is used to check assigned IP?
+Hindi-English: Windows me ipconfig command.
+English: Use ipconfig to check assigned IP.
+________________________________________
+Q10. What happens when DHCP server fails?
+Hindi-English: Clients ko IP nahi milta, network disconnect ho jata hai.
+English: Clients won’t receive IPs, leading to network failure.
+S

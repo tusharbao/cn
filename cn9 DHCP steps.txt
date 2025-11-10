@@ -1,0 +1,147 @@
+Cisco Packet Tracer me DHCP Server Configure Karne ke Steps
+Step 1: Cisco Packet Tracer Open Kare
+
+Apne computer me Cisco Packet Tracer application open kare.
+
+Step 2: Network Set Up Kare
+
+Devices Add Kare:
+
+Workspace me drag and drop kare:
+
+1 Router
+
+1 Switch
+
+Multiple PCs (Clients)
+
+Devices Connect Kare:
+
+Copper straight-through cable use kare:
+
+Router ka LAN port (FastEthernet0/0) → Switch
+
+Switch → PCs
+
+Step 3: Router Configure Kare
+
+Router ka CLI open kare:
+
+Router pe click kare → CLI tab
+
+Global Configuration Mode me jaye:
+
+enable
+configure terminal
+
+
+Router Interface Configure Kare:
+
+Jo interface switch se connect hai (FastEthernet0/0) usko configure kare:
+
+interface FastEthernet0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+
+
+DHCP Server Configure Kare:
+
+ip dhcp pool MY_POOL
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1
+dns-server 8.8.8.8
+exit
+
+
+Kuch IP Addresses Exclude Kare (Optional):
+
+Router IP ya other addresses conflict avoid karne ke liye exclude kare:
+
+ip dhcp excluded-address 192.168.1.1
+
+Step 4: Client PCs Configure Kare
+
+Har PC pe click kare → Desktop → IP Configuration
+
+DHCP select kare (PC automatically IP address request karega DHCP server se)
+
+Step 5: DHCP Configuration Verify Kare
+
+Har PC pe Desktop → Command Prompt open kare
+
+Command type kare:
+
+ipconfig
+
+
+PC ko DHCP server se IP address milna chahiye (e.g., 192.168.1.x)
+
+
+
+
+
+
+
+
+
+
+
+
+Steps to Configure a DHCP Server in Cisco Packet Tracer 
+Step 1: Open Cisco Packet Tracer 
+1. Launch Cisco Packet Tracer: 
+o Open the application on your computer. 
+Step 2: Set Up the Network 
+1. Add Devices: 
+o Drag and drop the following devices onto the workspace: 
+▪ 1 Router
+ ▪ 
+▪ 
+2. Connect Devices: 
+1 Switch 
+Multiple PCs  (Clients)
+ o Use the copper straight-through cable to connect: 
+▪ The router’s LAN port to the switch.
+ ▪ 
+The switch to the PCs. 
+Step 3: Configure the Router 
+1. Access the Router Configuration: 
+o Click on the router and go to the CLI tab. 
+2. Enter Global Configuration Mode: 
+code
+ enable
+ configure terminal 
+3. Set the Router Interface: 
+o Enter the interface configuration mode for the interface connected to the switch (e.g., FastEthernet0/0): 
+code
+ interface FastEthernet0/0 
+ip address 192.168.1.1 255.255.255.0 
+no shutdown
+ exit 
+4. Configure the DHCP Server: 
+o Define the DHCP pool: 
+plaintext
+ Copy code
+ ip dhcp pool MY_POOL
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 8.8.8.8 
+5. Exclude Addresses (Optional): 
+o If you want to exclude certain addresses (like the router's IP): 
+code
+ ip dhcp excluded-address 192.168.1.1
+ Step 4: Configure Client PCs 
+1. Select Each PC: 
+o Click on each PC to open the configuration window. 
+2. Set IP Configuration: 
+o 
+o 
+Go to the Desktop tab, select IP Configuration, and choose DHCP. 
+Each PC will automatically request an IP address from the DHCP server. 
+Step 5: Verify DHCP Configuration 
+1. Check IP Assignment on PCs: 
+o
+ o 
+After setting the PCs to DHCP, you can check if they received the correct IP addresses.
+ On each PC, go to the Desktop tab, select Command Prompt, and type: 

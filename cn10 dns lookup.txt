@@ -1,0 +1,257 @@
+import socket
+
+def dns_lookup():
+    choice = input("Enter '1' for URL to IP address or '2' for IP address to URL: ")
+
+    if choice == '1':
+        # URL to IP Address
+        url = input("Enter the URL (e.g., www.google.com): ")
+        try:
+            ip_address = socket.gethostbyname(url)
+            print(f"The IP address for {url} is: {ip_address}")
+        except socket.gaierror:
+            print("Could not resolve the URL. Please check the URL and try again.")
+
+    elif choice == '2':
+        # IP Address to URL
+        ip_address = input("Enter the IP address (e.g., 192.0.2.1): ")
+        try:
+            url = socket.gethostbyaddr(ip_address)
+            print(f"The URL for {ip_address} is: {url[0]}")
+        except socket.herror:
+            print("Could not resolve the IP address. Please check the IP and try again.")
+
+    else:
+        print("Invalid choice. Please enter '1' or '2'.")
+
+
+if __name__ == "__main__":
+    dns_lookup()
+    
+    
+    
+    
+'''
+output
+
+ URL to IP Address:
+ Enter '1' for URL to IP address or '2' for IP address to URL: 1
+ Enter the URL (e.g., www.example.com): www.google.com
+ The IP address for www.google.com is: 142.250.64.206
+ IP Address to URL:
+ Enter '1' for URL to IP address or '2' for IP address to URL: 2
+ Enter the IP address (e.g., 192.0.2.1): 142.250.64.206
+ The URL for 142.250.64.206 is: www.google.com
+ 
+ 
+ explanation:
+ 
+ import socket
+Python ka socket module import kiya, jo network communication aur DNS lookup ke liye use hota hai.
+
+
+def dns_lookup():
+dns_lookup function define kiya.
+
+Iske andar saara URL→IP aur IP→URL lookup logic hoga.
+
+
+choice = input("Enter '1' for URL to IP address or '2' for IP address to URL: ")
+User se input le rahe hain ki woh URL ko IP me convert karna chahta hai ya IP ko URL me.
+
+'1' ka matlab URL→IP aur '2' ka matlab IP→URL.
+
+
+
+if choice == '1':
+Agar user ne '1' enter kiya → URL→IP lookup karenge.
+
+
+url = input("Enter the URL (e.g., www.example.com): ")
+User se URL input le rahe hain, jaise www.google.com.
+
+
+try:
+try block start kiya → error handle karne ke liye, agar URL invalid ho to program crash na ho.
+
+python
+Copy code
+ip_address = socket.gethostbyname(url)
+socket.gethostbyname(url) → given URL ka IP address return karta hai.
+
+Example: www.google.com → 142.250.64.206.
+
+python
+Copy code
+print(f"The IP address for {url} is: {ip_address}")
+Result ko print kar rahe hain.
+
+Output example: The IP address for www.google.com is: 142.250.64.206
+
+python
+Copy code
+except socket.gaierror:
+Agar URL invalid ho ya resolve na ho paya → error handle karenge.
+
+python
+Copy code
+print("Could not resolve the URL. Please check the URL and try again.")
+User ko error message dikhate hain ki URL resolve nahi ho pa raha.
+
+python
+Copy code
+elif choice == '2':
+Agar user ne '2' enter kiya → IP→URL lookup karenge.
+
+python
+Copy code
+ip_address = input("Enter the IP address (e.g., 192.0.2.1): ")
+User se IP address input le rahe hain, jaise 142.250.64.206.
+
+python
+Copy code
+try:
+try block start kiya → agar IP invalid ho to error handle kar sake.
+
+python
+Copy code
+url = socket.gethostbyaddr(ip_address)
+socket.gethostbyaddr(ip_address) → given IP ka hostname (URL) return karta hai.
+
+Example: 142.250.64.206 → mia07s56-in-f14.1e100.net
+
+python
+Copy code
+print(f"The URL for {ip_address} is: {url[0]}")
+Result print kar rahe hain.
+
+url[0] me hostname string hota hai (tuple return hota hai gethostbyaddr se).
+
+python
+Copy code
+except socket.herror:
+Agar IP resolve na ho paaye → error handle karne ke liye.
+
+python
+Copy code
+print("Could not resolve the IP address. Please check the IP and try again.")
+User ko message dikhate hain ki IP invalid hai ya DNS me nahi mila.
+
+python
+Copy code
+else:
+Agar user '1' ya '2' ke alawa kuch bhi input kare → ye block run hoga.
+
+python
+Copy code
+print("Invalid choice. Please enter '1' or '2'.")
+User ko bata rahe hain ki invalid choice enter ki hai.
+
+python
+Copy code
+if __name__ == "__main__":
+Ye ensure karta hai ki script directly run ho raha hai, na ki import ho raha hai.
+
+python
+Copy code
+dns_lookup()
+dns_lookup() function ko call kar rahe hain, taaki program execute ho.
+
+
+
+
+
+
+questins:
+
+
+1. What is DNS?
+
+Hindi-English: DNS ka full form hai Domain Name System. Ye system URL (jaise www.google.com
+) ko IP address (jaise 142.250.64.206) me convert karta hai.
+English: DNS (Domain Name System) converts human-readable URLs into IP addresses.
+
+2. What is the purpose of DNS?
+
+Hindi-English: DNS ka purpose ye hai ki hum domain names use karein instead of IPs, taaki internet browsing easy ho.
+English: DNS allows users to use domain names instead of numeric IPs, making the internet easier to use.
+
+3. What is the difference between URL and IP address?
+
+Hindi-English: URL ek name hota hai (www.google.com
+), jabki IP address ek number hota hai (142.250.64.206) jo computer ko identify karta hai.
+English: URL is a readable name, while IP address is a numeric identifier of a device on a network.
+
+4. What is forward lookup?
+
+Hindi-English: Forward lookup me URL se IP address nikalte hain.
+Code me ye socket.gethostbyname(url) se hota hai.
+English: Forward lookup means resolving a domain name to an IP address (done by gethostbyname()).
+
+5. What is reverse lookup?
+
+Hindi-English: Reverse lookup me IP address se URL nikalte hain.
+Code me ye socket.gethostbyaddr(ip_address) se hota hai.
+English: Reverse lookup means resolving an IP address back to a hostname (done by gethostbyaddr()).
+
+6. Which function is used in programming for DNS resolution?
+
+Hindi-English:
+
+URL → IP ke liye: socket.gethostbyname()
+
+IP → URL ke liye: socket.gethostbyaddr()
+English:
+
+For URL to IP: socket.gethostbyname()
+
+For IP to URL: socket.gethostbyaddr()
+
+7. What command is used to check DNS in Windows/Linux?
+
+Hindi-English:
+
+Windows me: nslookup
+
+Linux me: dig ya host
+English:
+
+In Windows: nslookup
+
+In Linux: dig or host
+
+8. What is the structure of a DNS query?
+
+Hindi-English: DNS query me teen main parts hote hain — Header, Question, aur Answer section (Response me records aate hain).
+English: A DNS query consists of a header, a question section, and response sections (answer, authority, and additional).
+
+9. What are the DNS record types (A, MX, CNAME, etc.)?
+
+Hindi-English:
+
+A Record: Domain ka IPv4 address deta hai
+
+AAAA Record: IPv6 address deta hai
+
+MX Record: Mail server address batata hai
+
+CNAME Record: Canonical (alias) name batata hai
+
+NS Record: Name server ke baare me info deta hai
+English:
+
+A: Maps domain to IPv4
+
+AAAA: Maps domain to IPv6
+
+MX: Mail exchange (email server)
+
+CNAME: Canonical name (alias)
+
+NS: Name server info
+
+10. What happens if DNS server is not reachable?
+
+Hindi-English: Agar DNS server reachable nahi hai, to domain name resolve nahi hoga aur “server not found” ya “DNS error” aayegi.
+English: If DNS server is unreachable, domain names cannot be resolved, and you’ll get “server not found” or “DNS error.”
+'''

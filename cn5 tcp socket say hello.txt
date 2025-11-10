@@ -1,0 +1,205 @@
+step 1:make one folder
+
+step 2:server.py file in the folder 
+
+import socket
+
+def receive_file():
+    # Create TCP socket
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind(('127.0.0.1', 5001))
+    server_socket.listen(1)
+    print("Server listening on port 5001...")
+
+    # Accept client connection
+    conn, addr = server_socket.accept()
+    print(f"Connection from {addr}")
+
+    # Step 1: Receive hello from client
+    client_hello = conn.recv(1024).decode()
+    print(f"Client says: {client_hello}")
+
+    # Step 1: Send hello to client
+    conn.send("Hello from Server!".encode())
+
+    # Step 2: Receive file name
+    filename = conn.recv(1024).decode()
+    print(f"Receiving file: {filename}")
+
+    # Step 2: Receive file data and save it
+    with open("received_" + filename, 'wb') as f:
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            f.write(data)
+
+    print("File received successfully.")
+    conn.close()
+    server_socket.close()
+
+# Run the server
+receive_file()
+
+step 3:same client.py in same folder
+
+import socket 
+
+def send_file(file_path): 
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect(('127.0.0.1', 5001))
+
+    # Step 1: Send hello to server 
+    client_socket.send("Hello from Client!".encode())
+
+    # Step 1: Receive hello from server 
+    server_hello = client_socket.recv(1024).decode() 
+    print(f"Server says: {server_hello}")
+
+    # Step 2: Send file name 
+    filename = file_path.split('/')[-1]
+    client_socket.send(filename.encode())
+
+    # Step 2: Send file data 
+    with open(file_path, 'rb') as f:
+        while True:
+            bytes_read = f.read(1024)
+            if not bytes_read:
+                break
+            client_socket.send(bytes_read)
+
+    print("File sent successfully.")
+    client_socket.close()
+
+# Run the client 
+send_file("test.txt")  # Make sure test.txt exists
+
+step 4:save test.txt file in same folder
+
+step 5:open cmd change the path to server file  path and paste this "python server.py"
+//output:Server listening on port 5001...
+ 
+Connection from ('127.0.0.1', 56789)
+Client says: Hello from Client!
+Receiving file: test.txt
+File received successfully.
+
+
+
+step 6: again open cmd change the path to client file path and paste this"python client.py"
+//Server says: Hello from Server!
+File sent successfully.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+''' questions:
+
+1. What is a socket?
+
+Hindi-English: Socket ek connection point hota hai jahan client aur server ke beech communication hoti hai.
+English: A socket is an endpoint that allows communication between client and server programs over a network.
+
+2. What is TCP?
+
+Hindi-English: TCP (Transmission Control Protocol) ek reliable connection-oriented protocol hai jo data ko sahi order me deliver karta hai.
+English: TCP is a connection-oriented protocol that ensures reliable and ordered data transmission.
+
+3. What is the difference between TCP and UDP?
+
+Hindi-English:
+
+TCP: Reliable, connection-based, slow but accurate.
+
+UDP: Unreliable, connectionless, fast but may lose data.
+English:
+TCP provides reliable, ordered delivery, while UDP is faster but doesn’t guarantee delivery or order.
+
+4. Which layer uses TCP?
+
+Hindi-English: TCP Transport Layer me use hota hai (OSI model ke 4th layer me).
+English: TCP works at the Transport Layer of the OSI model.
+
+5. What are the functions of socket(), bind(), listen(), and accept()?
+
+Hindi-English:
+
+socket(): Naya socket (connection endpoint) create karta hai.
+
+bind(): Socket ko ek specific IP aur port se connect karta hai.
+
+listen(): Server ko client requests sunne ke mode me daal deta hai.
+
+accept(): Client connection ko accept karta hai aur data exchange start hota hai.
+English:
+
+socket(): Creates a new socket.
+
+bind(): Binds socket to IP and port.
+
+listen(): Puts server in listening mode.
+
+accept(): Accepts a client connection.
+
+6. What is a client and a server in a socket program?
+
+Hindi-English:
+
+Server: Jo wait karta hai aur data receive karta hai.
+
+Client: Jo connection initiate karta hai aur data send karta hai.
+English:
+
+Server waits for requests and receives data.
+
+Client initiates connection and sends data.
+
+7. How does TCP ensure reliable data transfer?
+
+Hindi-English: TCP data ko packets me bhejta hai, har packet ka acknowledgment leta hai, aur agar packet lost ho jaye to resend karta hai.
+English: TCP ensures reliability using acknowledgments, retransmission, and sequencing of data packets.
+
+8. What is a port number?
+
+Hindi-English: Port number ek unique number hota hai jo system me running service ko identify karta hai, jaise 5001.
+English: A port number identifies a specific process or service on a networked system.
+
+9. What is the output of the “Say Hello” program?
+
+Hindi-English:
+
+Server side:
+
+Server listening on port 5001...
+Connection from ('127.0.0.1', 56789)
+Client says: Hello from Client!
+Receiving file: test.txt
+File received successfully.
+
+
+Client side:
+
+Server says: Hello from Server!
+File sent successfully.
+
+
+English:
+The server receives a greeting and the file; the client sends a greeting and confirms file sent successfully.
+
+10. How is file transfer verified?
+
+Hindi-English: Jab file receive hoti hai to server ek nayi file save karta hai jiska naam received_test.txt hota hai — agar wo file folder me mil jaye to transfer successful hai.
+English: File transfer is verified by checking the new file (received_test.txt) created on the server side.'''
+
+

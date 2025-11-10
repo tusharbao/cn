@@ -1,0 +1,201 @@
+Step 1: Network Topology Create Kare
+
+Cisco Packet Tracer open kare.
+
+Devices drag kare:
+
+1 Layer 2 Switch (jaise 2960)
+
+2 PCs (Client PCs)
+
+Cables connect kare (Copper Straight-Through):
+
+PC1 FastEthernet0 → Switch FastEthernet0/1
+
+PC2 FastEthernet0 → Switch FastEthernet0/2
+
+Step 2: PCs Ko IP Address Assign Kare
+
+PC1 select kare → Desktop tab → IP Configuration → Assign kare:
+
+IP Address: 192.168.1.2
+
+Subnet Mask: 255.255.255.0
+
+PC2 ke liye:
+
+IP Address: 192.168.1.3
+
+Subnet Mask: 255.255.255.0
+
+Step 3: Connectivity Test Kare (PING)
+
+PC1 → Desktop tab → Command Prompt open kare
+
+Command type kare:
+
+ping 192.168.1.3
+
+
+Agar network sahi hai, to output aayega:
+
+Reply from 192.168.1.3
+
+
+Ye confirm karta hai ki PCs successfully communicate kar rahe hain.
+
+Step 4: Packet Capture Using Simulation Mode
+
+Simulation Mode activate kare → Bottom-right corner me Stopwatch icon click kare
+
+PC1 → Command Prompt → fir se type kare:
+
+ping 192.168.1.3
+
+
+Simulation window me packets observe kare:
+
+Aapko ICMP Echo Request aur Echo Reply packets dikhenge
+
+Packet ke journey (source → destination) bhi dekhi ja sakti hai
+
+Step 5: Packet Details Analyze Kare
+
+Simulation panel → Event List me click kare
+
+Kisi packet pe click kare → Details pane me dekhe:
+
+ICMP Echo Request → PC1 se PC2 ko bheja gaya
+
+ICMP Echo Reply → PC2 se PC1 ko return hua
+
+Source IP & Destination IP clearly visible hote hain
+
+Isse aapko pata chalta hai ki network ke andar packets kaise travel karte hain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Step 1: Create Network Topology in Packet Tracer 
+•
+ •
+ •
+ • 
+Step 1.1: Open Cisco Packet Tracer.
+ Step 1.2: Drag a Layer 2 Switch (e.g., 2960) into the workspace.
+ Step 1.3: Drag 2 PCs into the workspace.
+ Step 1.4: Use Copper Straight-Through cables to connect each PC to the switch: 
+o
+ o 
+Connect PC1's FastEthernet0 to Switch0's FastEthernet0/1.
+ Connect PC2's FastEthernet0 to Switch0's FastEthernet0/2. 
+Step 2: Assign IP Addresses to PCs 
+•
+ • 
+Step 2.1: Click on PC1, go to the Desktop tab, and select IP Configuration.
+ Step 2.2: Assign the following IP details: 
+o IP Address: 192.168.1.2 
+o Subnet Mask: 255.255.255.0 
+• Step 2.3: Do the same for PC2 and assign: 
+o IP Address: 192.168.1.3 
+o Subnet Mask: 255.255.255.0 
+Step 3: Test Connectivity Using PING Utility 
+•
+ • 
+Code:
+ Step 3.1: Click on PC1, open the Command Prompt from the Desktop tab.
+ Step 3.2: Test the connection by typing: 
+ping 192.168.1.3 
+o You should receive Reply from 192.168.1.3 confirming successful communication. 
+Step 4: Capture Ping Packets Using Simulation Mode in Packet Tracer 
+•
+ • 
+Code:
+ Step 4.1: Switch to Simulation Mode by clicking the Stopwatch icon in the bottom-right corner.
+ Step 4.2: Click on PC1 and go to the Command Prompt. Again, type: 
+ping 192.168.1.3 
+•
+ • 
+Step 4.3: Observe the packets being sent across the network in the simulation window.
+ Step 4.4: Click on any ICMP packet to view details such as Source, Destination, and the packet journey. 
+Step 5: Analysing Packet Details 
+•
+ • 
+Step 5.1: After the packet is captured, click on the Event List in the Simulation panel.
+ Step 5.2: Click on any of the packets in the list to see the detailed information, including: 
+o ICMP Echo Request
+ o ICMP Echo Reply 
+o Source and Destination IPs
+
+
+
+
+
+
+
+
+
+questions
+
+2. Setup a wired LAN using Layer 2 switch
+Q1. What is a LAN?
+
+Hindi-English: Local Area Network — ek chhoti area me connected computers ka group.
+English: LAN connects computers within a small area like a building.
+
+Q2. What is the function of a Layer 2 switch?
+
+Hindi-English: MAC addresses ke base par frames forward karta hai.
+English: A Layer 2 switch forwards frames based on MAC addresses.
+
+Q3. What type of cable is used for LAN connection?
+
+Hindi-English: Ethernet cable (Cat5e / Cat6).
+English: Ethernet cables (Cat5e/Cat6).
+
+Q4. What tool is used for testing cable connectivity?
+
+Hindi-English: Cable tester ya multimeter.
+English: Cable tester or multimeter.
+
+Q5. What is IP address configuration?
+
+Hindi-English: Device ko ek unique IP assign karna.
+English: Assigning a unique IP address to a device.
+
+Q6. How do you assign an IP address to a PC?
+
+Hindi-English: Packet Tracer me → PC → Desktop → IP Configuration.
+English: In Packet Tracer, go to PC → Desktop → IP Configuration.
+
+Q7. What is the purpose of the PING command?
+
+Hindi-English: Network connectivity check karne ke liye.
+English: To test connectivity between devices.
+
+Q8. What does a successful PING indicate?
+
+Hindi-English: Network properly connected hai.
+English: It indicates proper network connectivity.
+
+Q9. What is Wireshark used for?
+
+Hindi-English: Network packets ko capture aur analyze karne ke liye.
+English: Used to capture and analyze network packets.
+
+Q10. What is shown in Wireshark when you capture PING packets?
+
+Hindi-English: ICMP Echo Request aur Echo Reply packets.
+English: ICMP Echo Request and Echo Reply packets.

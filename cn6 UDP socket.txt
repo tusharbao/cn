@@ -1,0 +1,301 @@
+step 1:Make a folder 
+
+step 2:
+save file as server.py and copy this in itimport socket
+
+def start_server():
+    # Step 1: Create UDP socket
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    # Step 2: Bind server to localhost and port 5001
+    server_socket.bind(('0.0.0.0', 5001))
+    print("UDP Server is up and listening on port 5001...")
+
+    # Step 3: Receive file name from client
+    filename, client_addr = server_socket.recvfrom(1024)
+    filename = filename.decode()
+    print(f"Receiving file: {filename} from {client_addr}")
+
+    # Step 4: Open file to write received data
+    with open("received_" + filename, 'wb') as f:
+        while True:
+            data, addr = server_socket.recvfrom(4096)
+            if data == b'EOF':  # End Of File marker
+                break
+            f.write(data)
+
+    print(f"File '{filename}' received successfully and saved as 'received_{filename}'")
+
+    # Step 5: Send confirmation to client
+    server_socket.sendto(b"File received successfully.", client_addr)
+
+    # Close the socket
+    server_socket.close()
+
+
+if __name__ == "__main__":
+    start_server()
+
+step 2:
+save one more file as client.py 
+import socket
+import os
+
+def start_client():
+    server_ip = input("Enter server IP address: ")
+    filename = input("Enter the file name to send: ")
+
+    # Step 1: Create UDP socket
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    server_address = (server_ip, 5001)
+
+    # Step 2: Send file name first
+    client_socket.sendto(filename.encode(), server_address)
+
+    # Step 3: Read file in binary mode and send in chunks
+    if os.path.exists(filename):
+        with open(filename, 'rb') as f:
+            while True:
+                bytes_read = f.read(4096)
+                if not bytes_read:
+                    break
+                client_socket.sendto(bytes_read, server_address)
+        # Send end of file marker
+        client_socket.sendto(b'EOF', server_address)
+        print("File sent successfully.")
+    else:
+        print("File not found!")
+
+    # Step 4: Receive confirmation from server
+    msg, _ = client_socket.recvfrom(1024)
+    print("Server response:", msg.decode())
+
+    client_socket.close()
+
+
+if __name__ == "__main__":
+    start_client()
+
+step 3:save a text file as udp.txt in same folder
+
+step 4:open cmd change the path to servers file path after changing put this "python server.py"
+output:
+"UDP Server is up and listening on port 5001..."
+
+step 5 :open cmd again change path to client file path and then put "python client.py"
+output:
+Enter server IP address: 127.0.0.1
+Enter the file name to send: udp.txt
+File sent successfully.
+Server response: File received successfully.
+
+step 6: again check server cmd it will show this nowUDP Server is up and listening on port 5001...
+Receiving file: udp.txt from ('127.0.0.1', 59596)
+File 'udp.txt' received successfully and saved as 'received_udp.txt'
+
+
+
+
+
+
+
+
+
+
+
+full code and steps
+
+
+yeh UDP-based file transfer program hai — jisme server file receive karta hai aur client file send karta hai.
+Same folder me server.py, client.py, aur udp.txt file rakho.
+
+🟩 server.py
+import socket
+
+def start_server():
+    # Step 1: UDP socket banana (TCP nahi, UDP use ho raha hai)
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    # Step 2: Server ko localhost (0.0.0.0) aur port 5001 par bind karte hain
+    server_socket.bind(('0.0.0.0', 5001))
+    print("UDP Server is up and listening on port 5001...")
+
+    # Step 3: Client se file name receive karte hain
+    filename, client_addr = server_socket.recvfrom(1024)
+    filename = filename.decode()
+    print(f"Receiving file: {filename} from {client_addr}")
+
+    # Step 4: File open karte hain jisme data likhna hai
+    with open("received_" + filename, 'wb') as f:
+        while True:
+            data, addr = server_socket.recvfrom(4096)
+            if data == b'EOF':  # EOF (End of File) marker aane par loop break
+                break
+            f.write(data)
+
+    print(f"File '{filename}' received successfully and saved as 'received_{filename}'")
+
+    # Step 5: Client ko confirmation message bhejte hain
+    server_socket.sendto(b"File received successfully.", client_addr)
+
+    # Step 6: Socket close karte hain
+    server_socket.close()
+
+
+if __name__ == "__main__":
+    start_server()
+
+🟩 client.py
+import socket
+import os
+
+def start_client():
+    # Step 1: Server IP aur file name user se input lena
+    server_ip = input("Enter server IP address: ")
+    filename = input("Enter the file name to send: ")
+
+    # Step 2: UDP socket create karna
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    server_address = (server_ip, 5001)
+
+    # Step 3: File name server ko bhejna
+    client_socket.sendto(filename.encode(), server_address)
+
+    # Step 4: File ko read karke chunks me bhejna
+    if os.path.exists(filename):
+        with open(filename, 'rb') as f:
+            while True:
+                bytes_read = f.read(4096)
+                if not bytes_read:
+                    break
+                client_socket.sendto(bytes_read, server_address)
+        # EOF marker bhejna (End of File indicate karta hai)
+        client_socket.sendto(b'EOF', server_address)
+        print("File sent successfully.")
+    else:
+        print("File not found!")
+
+    # Step 5: Server se confirmation message receive karna
+    msg, _ = client_socket.recvfrom(1024)
+    print("Server response:", msg.decode())
+
+    # Step 6: Socket close karna
+    client_socket.close()
+
+
+if __name__ == "__main__":
+    start_client()
+
+🟩 udp.txt
+
+ek simple text file banao same folder me jisme kuch likh do, for example:
+
+This is a UDP file transfer test.
+
+🟩 Execution Steps
+Step 1️⃣:
+
+Server start karo
+
+python server.py
+
+
+Output:
+
+UDP Server is up and listening on port 5001...
+
+Step 2️⃣:
+
+Client run karo (dusre CMD window me)
+
+python client.py
+
+
+Input & Output:
+
+Enter server IP address: 127.0.0.1
+Enter the file name to send: udp.txt
+File sent successfully.
+Server response: File received successfully.
+
+Step 3️⃣:
+
+Server CMD me ab ye dikhai dega:
+
+UDP Server is up and listening on port 5001...
+Receiving file: udp.txt from ('127.0.0.1', 59596)
+File 'udp.txt' received successfully and saved as 'received_udp.txt'
+
+
+✅ Result:
+Server folder me ek new file received_udp.txt ban jaayegi — jisme same data hoga jo udp.txt me tha.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+questions:
+
+6. UDP Socket Program for File Transfer
+Q1. What is UDP?
+
+Hindi-English: UDP (User Datagram Protocol) ek fast, connectionless protocol hai.
+English: UDP is a fast, connectionless protocol.
+
+Q2. How is UDP different from TCP?
+
+Hindi-English: UDP me connection nahi banta aur reliability kam hoti hai.
+English: UDP doesn’t establish a connection and is less reliable than TCP.
+
+Q3. What is meant by connectionless service?
+
+Hindi-English: Data bina connection ke bheja jata hai.
+English: Data is sent without establishing a connection.
+
+Q4. Is UDP reliable? Why or why not?
+
+Hindi-English: Nahi, kyunki error checking aur acknowledgment nahi hota.
+English: No, because it lacks acknowledgment and error recovery.
+
+Q5. Real-life examples of UDP?
+
+Hindi-English: Video streaming, VoIP, online gaming.
+English: Used in video streaming, VoIP, gaming.
+
+Q6. What functions are used for UDP communication?
+
+Hindi-English: socket(), sendto(), recvfrom(), bind().
+English: socket(), sendto(), recvfrom(), bind().
+
+Q7. How do you send and receive files using UDP?
+
+Hindi-English: Client file ko chunks me send karta hai aur server recvfrom() se receive karta hai.
+English: Client sends file chunks; server receives with recvfrom().
+
+Q8. What types of files can be transferred?
+
+Hindi-English: Text, image, or any binary file.
+English: Text, image, or any binary files.
+
+Q9. What happens if a packet is lost in UDP?
+
+Hindi-English: Packet resend nahi hota; data loss hota hai.
+English: Lost packets are not retransmitted, causing data loss.
+
+Q10. Why is UDP preferred for audio/video transfer?
+
+Hindi-English: Kyunki fast hai aur thoda packet loss acceptable hai.
+English: It’s faster, and small packet loss doesn’t affect real-time media.
